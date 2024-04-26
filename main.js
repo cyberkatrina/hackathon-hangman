@@ -82,7 +82,7 @@ if (typeof describe === 'function') {
     it("Can win", () => {
       word = "hello"
       result = "hell_"
-      assert.equal(hangMan("o"), "hello");
+      assert.equal(hangMan("o"), result + ", You won!");
     });
   });
 
