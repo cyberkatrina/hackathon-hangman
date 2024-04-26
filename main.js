@@ -11,16 +11,52 @@ const rl = readline.createInterface({
 });
 
 
+
 // Your code right here
+let result
+let word
+
+let words = ['hello', 'balloon','clean','spongebob','peanut','recursion','light','vitamin','purple','hazard']
+const generateWord = () => {
+  word = words[Math.floor(Math.random()*words.length)];
+  result = "_".repeat(word.length);
+  return word
+}
+
+const hangMan = (userInput) => {
+  if (result == undefined) {
+    generateWord()
+  }
+  let wordArray = word.split('')
+  let correct = false
+  let input = userInput.trim().toLowerCase()
+  let resultArray = result.split('')
+  for (let i = 0; i < wordArray.length; i++) {
+    if (wordArray[i] == input) {
+      resultArray[i] = input
+      correct = true
+    }
+  }
+  if (correct == true) {
+    result = resultArray.join("")
+    if (result == word) {
+      return result + ", You won!"
+    }
+    return result
+  }
+  else {
+    return "Incorrect guess, try again"
+  }
+}
 
 
 // TO-DO - UPDATE TO USE YOUR FUNCTION
-// const getPrompt = () => {
-//   rl.question('word ', (answer) => {
-//     console.log( pigLatin(answer) );
-//     getPrompt();
-//   });
-// }
+const getPrompt = () => {
+  rl.question('letter ', (userInput) => {
+    console.log( hangMan(userInput) );
+    getPrompt();
+  });
+}
 
 // Unit Tests
 // to use them run the command: npm test main.js
@@ -29,12 +65,34 @@ const rl = readline.createInterface({
 // TO-DO - ADD TESTS
 if (typeof describe === 'function') {
 
-  describe("#yourFunctionName)", () => {
-    it("test description", () => {
-      assert.equal(yourFunctionName("test input"), "expected return value");
-      assert.equal(yourFunctionName("test input"), "expected return value");
+  describe("#makeGuess", () => {
+    it("Makes a correct guess", () => {
+      word = "hello"
+      result = "_____"
+      assert.equal(hangMan("l"), "__ll_");
+    });
+    it("Makes a correct guess", () => {
+      word = "hello"
+      result = "__ll_"
+      assert.equal(hangMan("H"), "h_ll_");
     });
   });
+
+  describe("#checkWin", () => {
+    it("Can win", () => {
+      word = "hello"
+      result = "hell_"
+      assert.equal(hangMan("o"), "hello");
+    });
+  });
+
+  describe("#canBeWrong", () => {
+    it("Can be wrong", () => {
+      word = 'hello'
+      assert.equal(hangMan("k"), "Incorrect guess, try again");
+    });
+  });
+
 } else {
 
   getPrompt();
