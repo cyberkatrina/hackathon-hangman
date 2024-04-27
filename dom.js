@@ -1,5 +1,7 @@
 let result
 let word
+let health = 5
+let won = false
 
 let words = ['hello', 'balloon','clean','spongebob','peanut','recursion','light','vitamin','purple','hazard']
 const generateWord = () => {
@@ -9,6 +11,13 @@ const generateWord = () => {
 }
 
 const hangMan = () => {
+  if (health == 0) {
+    document.getElementById("result").innerText = word.split('').join(' ') + "\n \n You have lost, give up!"
+    return
+  } else if (won) {
+    document.getElementById("result").innerText = word.split('').join(' ') + "\n \n Please refresh to play again."
+    return
+  }
   if (result == undefined) {
     generateWord()
   }
@@ -30,12 +39,20 @@ const hangMan = () => {
   if (correct == true) {
     result = resultArray.join("")
     if (result == word) {
-      document.getElementById("result").innerText = result.split('').join(' ') + ", You won!"
+      won = true
+      document.getElementById("result").innerText = result.split('').join(' ') + "\n \n You won!"
+    } else {
+      document.getElementById("result").innerText = result.split('').join(' ')
     }
-    document.getElementById("result").innerText = result.split('').join(' ')
   }
   else {
-    document.getElementById("result").innerText = result.split('').join(' ') + "\n \n Incorrect guess, try again"
+    health -= 1
+    if (health == 0) {
+      console.log("dead")
+      document.getElementById("result").innerText = word.split('').join(' ') + "\n \n Game Over!"
+    } else {
+      document.getElementById("result").innerText = result.split('').join(' ') + "\n \n Incorrect guess, " + health + " tries left."
+    }
   }
   console.log("result:" + result)
 }

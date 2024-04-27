@@ -15,6 +15,8 @@ const rl = readline.createInterface({
 // Your code right here
 let result
 let word
+let health = 5
+let won = false
 
 let words = ['hello', 'balloon','clean','spongebob','peanut','recursion','light','vitamin','purple','hazard']
 const generateWord = () => {
@@ -24,6 +26,11 @@ const generateWord = () => {
 }
 
 const hangMan = (userInput) => {
+  if (health == 0) {
+    return "You have lost, give up!"
+  } else if (won) {
+    return "Please restart to play again."
+  }
   if (result == undefined) {
     generateWord()
   }
@@ -40,12 +47,17 @@ const hangMan = (userInput) => {
   if (correct == true) {
     result = resultArray.join("")
     if (result == word) {
+      won = true
       return result + ", You won!"
     }
     return result
   }
   else {
-    return "Incorrect guess, try again"
+    health -= 1
+    if (health == 0) {
+      return "Game Over! Correct word: " + word
+    }
+    return "Incorrect guess, " + health + " tries left."
   }
 }
 
