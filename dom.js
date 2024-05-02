@@ -1,6 +1,6 @@
 let result
 let word
-let health = 5
+let health = 6
 let won = false
 
 let words = ['hello', 'balloon','clean','spongebob','peanut','recursion','light','vitamin','purple','hazard']
@@ -55,6 +55,7 @@ const hangMan = () => {
     }
   }
   console.log("result:" + result)
+  displayFunc()
 }
 
 
@@ -62,3 +63,31 @@ const initialize = () => {
   generateWord()
   document.getElementById("result").innerText = result.split('').join(' ')
 }
+
+
+let image = document.getElementById("image")
+const displayFunc = () => {
+  switch(health) {
+    case 6:
+      image.src = "Images/H-Step-7.png"
+      break;
+    case 5:
+      image.src = "Images/H-Step-6.png"
+      break;
+    case 4:
+      image.src = "Images/H-Step-5.png"
+      break;
+    case 3:
+      image.src = "Images/H-Step-4.png"
+      break;
+    case 2:
+      image.src = "Images/H-Step-3.png"
+      break;
+    case 1:
+      image.src = "Images/H-Step-2.png"
+      break;
+    default:
+      image.src = "Images/H-Step-1.png"
+  }
+}
+displayFunc()
