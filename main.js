@@ -62,6 +62,11 @@ const hangMan = (userInput) => {
 }
 
 
+
+
+
+
+
 // TO-DO - UPDATE TO USE YOUR FUNCTION
 const getPrompt = () => {
   rl.question('letter ', (userInput) => {
