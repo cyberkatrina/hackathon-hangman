@@ -1,0 +1,26 @@
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  padding-top: 30pt; 
+  color: darkblue;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 30pt;
+}
+
+#image {
+  width: 200px; 
+  height: 200px;
+}
+
+#result {
+  padding-top: 10pt;
+}
+
+.content {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20pt;
+  justify-content: center;
+  align-items: space-around;
+}
